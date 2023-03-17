@@ -1,14 +1,30 @@
-//your code here
 function findMajorityElement(arr) {
-  const frequencyMap = {};
+  let majorityElement = arr[0];
+  let count = 1;
 
-  for (let i = 0; i < arr.length; i++) {
-    const element = arr[i];
-    frequencyMap[element] = (frequencyMap[element] || 0) + 1;
-    if (frequencyMap[element] > arr.length / 2) {
-      return element;
+  for (let i = 1; i < arr.length; i++) {
+    if (arr[i] === majorityElement) {
+      count++;
+    } else {
+      count--;
+    }
+
+    if (count === 0) {
+      majorityElement = arr[i];
+      count = 1;
     }
   }
 
-  return -1; // no majority element found
+  count = 0;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === majorityElement) {
+      count++;
+    }
+  }
+
+  if (count > Math.floor(arr.length / 2)) {
+    return majorityElement;
+  } else {
+    return -1; // no majority element found
+  }
 }
